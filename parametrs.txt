@@ -1,0 +1,1 @@
+pyinstaller --noconfirm --onedir --windowed --add-data "D:/PythonProject/SecurityTools/.venv/Lib/site-packages/customtkinter;customtkinter/"  "main.py"
