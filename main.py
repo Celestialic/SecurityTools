@@ -1,6 +1,7 @@
+import customtkinter as ctk
+import webbrowser
 import random
 import string
-import customtkinter as ctk
 import pyperclip
 
 def generate_password(length, use_digits, use_letters, use_specials):
@@ -118,8 +119,9 @@ theme_var = ctk.BooleanVar(value=True)
 theme_check = ctk.CTkCheckBox(app, text="Чёрная тема", variable=theme_var, command=toggle_theme)
 theme_check.pack(pady=10)
 
-# Установим начальную тему
-toggle_theme()
+# Кнопка для открытия Github
+github_button = ctk.CTkButton(app, text="Github", command=lambda: webbrowser.open("https://github.com/Celestialic/SecurityTools"))
+github_button.pack(pady=10)
 
 # Запуск приложения
 app.mainloop()
