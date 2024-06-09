@@ -4,6 +4,7 @@ import random
 import string
 import pyperclip
 
+# Функция для генерации пароля
 def generate_password(length, use_digits, use_letters, use_specials):
     characters = ''
     if use_digits:
@@ -19,6 +20,7 @@ def generate_password(length, use_digits, use_letters, use_specials):
     password = ''.join(random.choice(characters) for _ in range(length))
     return password
 
+# Функция для генерации пароля при нажатии кнопки
 def on_generate():
     global password_window
     try:
@@ -35,6 +37,7 @@ def on_generate():
     except ValueError as e:
         result_label.configure(text=str(e))
 
+# Функция для отображения сгенерированного пароля
 def show_password_window(password):
     global password_window
     password_window = ctk.CTkToplevel(app)
@@ -49,19 +52,22 @@ def show_password_window(password):
     copy_button = ctk.CTkButton(password_window, text="Скопировать", command=lambda: copy_to_clipboard(password))
     copy_button.pack(pady=5)
 
+# Функция для копирования пароля в буфер обмена
 def copy_to_clipboard(password):
     pyperclip.copy(password)
 
+# Функция для обновления метки длины пароля
 def update_length_label(value):
     length_label.configure(text=f"Длина пароля: {int(value)}")
 
+# Функция для смены темы
 def toggle_theme():
     if theme_var.get():
         ctk.set_appearance_mode("dark")
     else:
         ctk.set_appearance_mode("light")
 
-# Настройка окна
+# Создание приложения
 app = ctk.CTk()
 app.title("Генератор паролей")
 app.geometry("400x400")
@@ -69,7 +75,7 @@ app.resizable(False, False)
 
 password_window = None
 
-# Поле для ввода длины пароля
+# Метка для ввода длины пароля
 length_label = ctk.CTkLabel(app, text="Длина пароля: 25")
 length_label.pack(pady=10)
 length_slider = ctk.CTkSlider(app, from_=1, to=50, number_of_steps=49, command=update_length_label)
