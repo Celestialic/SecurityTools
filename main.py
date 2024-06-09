@@ -14,7 +14,7 @@ def generate_password(length, use_digits, use_letters, use_specials):
         characters += string.punctuation
 
     if not characters:
-        raise ValueError("At least one character set must be selected")
+        raise ValueError("Никакой из режимов не выбран.")
 
     password = ''.join(random.choice(characters) for _ in range(length))
     return password
@@ -114,7 +114,7 @@ generate_button.pack(pady=20)
 result_label = ctk.CTkLabel(app, text="")
 result_label.pack(pady=10)
 
-# Галочка для смены темы
+# Чекбокс для смены темы
 theme_var = ctk.BooleanVar(value=True)
 theme_check = ctk.CTkCheckBox(app, text="Чёрная тема", variable=theme_var, command=toggle_theme)
 theme_check.pack(pady=10)
