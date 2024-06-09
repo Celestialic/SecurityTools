@@ -55,21 +55,6 @@ def copy_to_clipboard(password):
 def update_length_label(value):
     length_label.configure(text=f"Длина пароля: {int(value)}")
 
-def apply_color_theme():
-    color = "blue"
-    app.configure(fg_color=color)
-    length_label.configure(fg_color=color)
-    length_slider.configure(button_color=color)
-    digits_check.configure(fg_color=color)
-    letters_check.configure(fg_color=color)
-    specials_check.configure(fg_color=color)
-    generate_button.configure(fg_color=color)
-    result_label.configure(fg_color=color)
-    
-    if password_window is not None:
-        for widget in password_window.winfo_children():
-            widget.configure(fg_color=color)
-
 def toggle_theme():
     if theme_var.get():
         ctk.set_appearance_mode("dark")
