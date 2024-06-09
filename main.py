@@ -3,6 +3,15 @@ import webbrowser
 import random
 import string
 import pyperclip
+import pygame
+
+# Инициализация pygame для воспроизведения звука
+pygame.mixer.init()
+
+# Функция для воспроизведения звука
+def play_click_sound():
+    pygame.mixer.music.load("assets/ui_click.mp3")
+    pygame.mixer.music.play()
 
 # Функция для генерации пароля
 def generate_password(length, use_digits, use_letters, use_specials):
@@ -22,6 +31,7 @@ def generate_password(length, use_digits, use_letters, use_specials):
 
 # Функция для генерации пароля при нажатии кнопки
 def on_generate():
+    play_click_sound()
     global password_window
     try:
         length = int(length_slider.get())
@@ -54,6 +64,7 @@ def show_password_window(password):
 
 # Функция для копирования пароля в буфер обмена
 def copy_to_clipboard(password):
+    play_click_sound()
     pyperclip.copy(password)
 
 # Функция для обновления метки длины пароля
@@ -62,6 +73,7 @@ def update_length_label(value):
 
 # Функция для смены темы
 def toggle_theme():
+    play_click_sound()
     if theme_var.get():
         ctk.set_appearance_mode("dark")
     else:
@@ -90,11 +102,11 @@ specials_var = ctk.BooleanVar(value=True)
 checkbox_frame = ctk.CTkFrame(app)
 checkbox_frame.pack(pady=10)
 
-digits_check = ctk.CTkCheckBox(checkbox_frame, text="Цифры", variable=digits_var)
+digits_check = ctk.CTkCheckBox(checkbox_frame, text="Цифры", variable=digits_var, command=play_click_sound)
 digits_check.grid(row=0, column=0, padx=5)
-letters_check = ctk.CTkCheckBox(checkbox_frame, text="Буквы", variable=letters_var)
+letters_check = ctk.CTkCheckBox(checkbox_frame, text="Буквы", variable=letters_var, command=play_click_sound)
 letters_check.grid(row=0, column=1, padx=5)
-specials_check = ctk.CTkCheckBox(checkbox_frame, text="Спецсимволы", variable=specials_var)
+specials_check = ctk.CTkCheckBox(checkbox_frame, text="Спецсимволы", variable=specials_var, command=play_click_sound)
 specials_check.grid(row=0, column=2, padx=5)
 
 # Кнопка для генерации пароля
@@ -111,7 +123,7 @@ theme_check = ctk.CTkCheckBox(app, text="Чёрная тема", variable=theme_
 theme_check.pack(pady=10)
 
 # Кнопка для открытия Github
-github_button = ctk.CTkButton(app, text="Github", command=lambda: webbrowser.open("https://github.com/Celestialic/SecurityTools"))
+github_button = ctk.CTkButton(app, text="Github", command=lambda: [play_click_sound(), webbrowser.open("https://github.com/Celestialic/SecurityTools")])
 github_button.pack(pady=10)
 
 # Запуск приложения
